@@ -1,0 +1,39 @@
+﻿<div class="board">
+    @for (int i = 0; i < 9; i++) {
+        int squareNumber = i;
+
+        <Square @key="squareNumber" value=values[squareNumber]
+                ClickHandler="@(() => HandleCLick(squareNumber))"/>
+    }
+</div>
+<style scoped>
+    .board {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        background-color: #0a8efa;
+        padding: 10px;
+        width: 200px;
+        height: 200px;
+        border-radius: 10%;
+    }
+</style>
+
+@code {
+    private char[] values = new char[9];
+// called on the start, populates the array with empty fields 
+    protected override async Task OnInitializedAsync() {
+        values = new[] {
+            ' ', ' ', ' ',
+            ' ', ' ', ' ',
+            ' ', ' ', ' '
+        };
+    }
+// If current value is 'O' set X, otherwise set 'O'
+    private void HandleCLick(int i) {
+        values[i] = values[i] == 'O' ? 'X' : 'O';
+    }
+
+
+
+
+}
